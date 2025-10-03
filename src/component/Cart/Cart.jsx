@@ -7,7 +7,7 @@ import { Button, Card , Box} from "@mui/material";
 import {ErrorMessage, Field, Formik, Form} from "formik";
 
 
-const style = {
+export const style = {
   position: 'absolute',
   top: '50%',
   left: '50%',
