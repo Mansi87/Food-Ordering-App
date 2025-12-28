@@ -9,9 +9,11 @@ import com.yum.repository.CartRepository;
 import com.yum.repository.FoodRepository;
 import com.yum.request.AddCartItemRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class CartServiceImp implements CartService{
 
     @Autowired
