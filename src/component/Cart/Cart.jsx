@@ -5,6 +5,8 @@ import { AddressCard } from "./AddressCard";
 import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
 import { Button, Card , Box} from "@mui/material";
 import {ErrorMessage, Field, Formik, Form} from "formik";
+import { useDispatch, useSelector } from "react-redux";
+import { createOrder } from "../State/Order/Action";
 
 
 export const style = {
@@ -27,14 +29,29 @@ const initialValues={
     state:""
 }
 
-const items = [1, 1, 1];
-
 const Cart = () => {
   const createOrderUsingSelectedAddress = () => {};
   const handleOpenAddressModel = () => setOpen(true);
   const [open, setOpen] = React.useState(false);
+  const {cart,auth}=useSelector(store=>store)
+  const dispatch=useDispatch()
   const handleClose = () => setOpen(false);
   const handleSubmit = (values) => {
+    const data={
+      jwt:localStorage.getItem("jwt"),
+      order:{
+        restaurantId:cart.cartItems[0].food?.restaurantId,
+        deliveryAddress:{
+          fullName:auth.user?.fullName,
+          streetAddress:values.streetAddress,
+          city:values.city,
+          state:values.state,
+          postalCode:values.pincode,
+          country:"india"
+        }
+      }
+    }
+    dispatch(createOrder(data))
     console.log("form value", values);
     // Handle form submission here
   }
@@ -43,8 +60,8 @@ const Cart = () => {
     <>
       <main className="lg:flex justify-between">
         <section className="lg:w-[30%] space-y-6 lg:min-h-screen pt-10">
-          {items.map((item, index) => (
-            <CartItem key={index} />
+          {cart.cartItems.map((item) => (
+            <CartItem item={item} />
           ))}
           <Divider />
           <div className="billDetails px-5 text-sm">
@@ -52,7 +69,7 @@ const Cart = () => {
             <div className="space-y-3">
               <div className="flex justify-between text-gray-400">
                 <p>Item Total</p>
-                <p>₹300</p>
+                <p>₹{cart.cart?.total}</p>
               </div>
               <div className="flex justify-between text-gray-400">
                 <p>Delivery fee</p>
@@ -61,16 +78,15 @@ const Cart = () => {
               <div className="flex justify-between text-gray-400">
                 <p>Platform fee</p>
                 <p>₹3</p>
-              </div>
-              <div className="flex justify-between text-gray-400">
-                <p>GST ans Restaurant Charges</p>
+              </div>              <div className="flex justify-between text-gray-400">
+                <p>GST and Restaurant Charges</p>
                 <p>₹5</p>
               </div>
               <Divider />
             </div>
             <div className="flex justify-between text-gray-400">
               <p>Total Pay</p>
-              <p>₹318</p>
+              <p>₹{cart.cart?.total+33+21}</p>
             </div>
           </div>
         </section>

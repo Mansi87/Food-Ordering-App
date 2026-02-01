@@ -11,6 +11,7 @@ export const findCart = (token) => {
                     Authorization: `Bearer ${token}`,
                 },
             });
+            console.log("my cart", response.data)
             dispatch({type:FIND_CART_SUCCESS, payload:response.data});
         }catch(error){
             dispatch({type:FIND_CART_FAILURE,payload:error});
@@ -40,7 +41,7 @@ export const addItemToCart = (reqData) => {
         try{
             const {data} = await api.PUT(`/api/cart/add`,reqData.cartItem,{
                 headers:{
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${reqData.token}`,
                 },
             });
             console.log("add item to crt", data)

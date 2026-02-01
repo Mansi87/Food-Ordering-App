@@ -223,6 +223,7 @@ export const getRestaurantsCategory = ({jwt, restaurantId}) => {
             console.log("get all restaurants category", res.data);
             dispatch({type:GET_RESTAURANTS_CATEGORY_SUCCESS, payload:res.data});
         }catch(error){
+            console.log("catch error", error)
             dispatch({type:GET_RESTAURANTS_CATEGORY_FAILURE, payload:error});
         }
     };

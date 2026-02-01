@@ -16,6 +16,7 @@ const Home = () => {
     useEffect(()=>{
         dispatch(getAllRestaurantsAction(jwt))
     },[])
+
     
     return(
         <div className='pb-10'>
