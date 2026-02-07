@@ -9,7 +9,7 @@ export const createOrder = (reqData) => {
             const {data} = await api.post('/api/order', reqData.order, {
                 headers:{
                     Authorization: `Bearer ${reqData.jwt}`,
-                },
+                }, 
             });
             /*if(data.payment_url){
                 window.location.href=data.payment_url;
