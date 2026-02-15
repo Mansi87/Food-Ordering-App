@@ -11,7 +11,7 @@ import { Button } from '@mui/material';
 import { categorizeIngredients } from '../util/categorizeingredients';
 import { useDispatch } from 'react-redux';
 import { addItemToCart } from '../State/Cart/Action';
-import { api } from '../config/api';
+
 
 const demo=[
     {
